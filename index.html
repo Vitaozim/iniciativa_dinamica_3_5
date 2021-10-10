@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Gerador de Iniciativa Dinâmica</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	<main>
+		<h1>Gerador de Iniciativa Dinâmica</h1>
+
+		<section id="area-geradora">
+			<section id="gerador">
+				<table id="nome-batalha">
+					<thead>
+						<tr>
+							<th>ID batalha</th>
+							<th>Rodada</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td><input type="text" class="nome-batalha"></td>
+							<td><input type="number" class="n-rodada" value="1" min="1"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="novo-e-gerar">
+					<button id="adicionar-novo"><i class="fas fa-plus"></i> adicionar</button>
+					<button id="gerar-iniciativas">Gerar!</button>
+				</div>
+
+				<table id="form-iniciativa">
+					<thead>
+						<tr>
+							<th>Nome Personagem</th>
+							<th>Ini.</th>
+							<th>Des.</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td><input class="nome" type="text"></td>
+							<td><input class="iniciativa" type="number" value="0"></td>
+							<td><input class="mod-des" type="number" value="0"></td>
+
+							<td>
+								<div class="botoes">
+									
+									<button class="player-ou-npc player" data-player="Jogador" data-npc="NPC">
+										<i class="npc fas fa-dice"></i>
+										<i class="player fas fa-user"></i>
+									</button>
+
+									<button class="vivo-ou-morto vivo" data-vivo="Vivo" data-morto="Morto">
+										<i class="vivo fas fa-heart"></i>
+										<i class="morto fas fa-skull-crossbones"></i>
+									</button>
+
+									<button class="duplicar" data-tip="Duplicar"><i class="far fa-clone"></i></button>
+									<button class="excluir" data-tip="Excluir"><i class="fas fa-times"></i></button>
+									
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</section>
+
+			<section id="iniciativas-geradas">
+				<h2 class="nome-batalha">Título da batalha</h2>
+				<p class="rodadas"><span class="n-rodada">1</span><sup>a</sup> rodada</p>
+
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Nome</th>
+							<th>Des.</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="template">
+							<td class="ini-total" data-soma=""></td>
+							<td class="nome"></td>
+							<td class="mod-des"></td>
+							<td class="player-ou-npc">
+								<i class="npc fas fa-dice" data-popup="NPC"></i>
+								<i class="player fas fa-user" data-popup="Jogador"></i>
+							</td>
+							<td class="vivo-ou-morto">
+								<i class="vivo fas fa-heart" data-popup="Vivo"></i>
+								<i class="morto fas fa-skull-crossbones" data-popup="Morto"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</section>
+		</section>
+
+		
+		
+		
+
+
+	</main>
+
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script type="text/javascript" src="assets/js/app.js"></script>
+
+</body>
+</html>

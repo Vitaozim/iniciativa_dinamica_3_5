@@ -1,0 +1,308 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@import "normalize";
+@import "fontface";
+@import "fontawesome";
+@import "mixins";
+
+
+
+
+
+main{
+	margin: 3em 0;
+	width: 1200px;
+	min-height: 50em;
+	max-width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 3em 3em 6em;
+	background-color: $cor-papel;
+	box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+}
+
+
+h1{
+	font-size: 2.5em;
+	margin: 0;
+	margin-bottom: 1em;
+}
+
+input{
+
+}
+
+
+#area-geradora{
+	display: flex;
+	justify-content: space-between;
+	& > section{
+		width: 50%;
+	}
+}
+
+#gerador{
+	margin-right: 1em;
+}
+
+#iniciativas-geradas{
+
+}
+
+#nome-batalha{
+	width: auto;
+	margin-bottom: 2em;
+	
+
+	tbody{
+		input{
+			&.nome-batalha{
+				width: 200px;
+			}
+
+			&.n-rodada{
+				width: 50px;
+			}
+		}
+	}
+}
+
+.novo-e-gerar{
+	display: flex;
+	justify-content: space-between;
+}
+
+#form-iniciativa{
+
+	tbody{
+		tr{
+			&:not(:first-child){
+				animation: pessoaSurge 0.4s cubic-bezier(0,0,.34,1) 0s 1 normal both;
+			}
+
+			&.excluido{
+				animation: pessoaSome 0.2s cubic-bezier(0,0,.34,1) 0s 1 normal both;
+			}
+
+			&:only-child{
+				.excluir{
+					pointer-events: none;
+					opacity: 0.5;
+				}
+			}
+		}
+		
+		td{
+			padding-left: 0;
+
+			input{
+				&.nome{
+					width: 300px;
+				}
+
+				&.iniciativa, &.mod-des{
+					width: 50px;
+				}
+			}
+
+			.botoes{
+				display: flex;
+
+			}
+
+			button{
+				background-color: transparent;
+				font-size: inherit;
+				font-family: inherit;
+				line-height: 1;
+				color: inherit;
+				border: none;
+				border-radius: 0;
+				width: 3ch;
+				padding: 0;
+				text-align: center;
+				@extend %tooltip;
+				
+				&:after{
+					content: attr(data-tip);
+				}
+
+				&:hover{
+					cursor: pointer;
+				}
+				
+
+				&.player-ou-npc{
+					&.player{
+						i.npc{display: none;}
+						i.player{display: inline;}
+						&:after{
+							content: attr(data-player);
+						}
+					}
+
+					&.npc{
+						i.npc{display: inline;}
+						i.player{display: none;}
+						&:after{
+							content: attr(data-npc);
+						}
+					}
+				}
+
+				&.vivo-ou-morto{
+					&.vivo{
+						i.morto{display: none;}
+						i.vivo{display: inline;}
+						&:after{
+							content: attr(data-vivo);
+						}
+					}
+
+					&.morto{
+						i.morto{display: inline;}
+						i.vivo{display: none;}
+						&:after{
+							content: attr(data-morto);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+#iniciativas-geradas{
+	.nome-batalha{
+		font-size: 1.5em;
+		font-weight: bold;
+		margin: 0;
+	}
+
+	.rodadas{
+		margin: 0;
+		font-size: 1em;
+		margin-bottom: 1em;
+	}
+
+	table{
+		thead{
+			tr{
+				th:nth-child(2){
+					padding-left: 1rem;
+				}
+			}
+		}
+		tbody{
+			tr{
+				@keyframes iniAparecem {
+					0%{
+						opacity: 0;
+						transform: translateY(1em);
+					}
+
+					100%{
+						opacity: 1;
+						transform: translateY(0);
+					}
+				}
+
+				animation: iniAparecem 0.2s ease-out 0s 1 normal both;
+				$delay: 0.05s;
+				@for $i from 1 through 40 {
+					&:nth-child(#{$i}) {
+						animation-delay: $i * $delay;
+					}
+				}
+				&.template{
+					display: none;
+				}
+				&.morto{
+					.nome{
+						color: #999999
+					}
+				}
+				&.player{
+					.nome{
+						font-weight: bold;
+						font-style: italic;
+					}
+				}
+			}
+
+			.ini-total{
+				font-weight: 800;
+				font-size: 1.2em;
+				@extend %tooltip;
+				&:after{
+					content: attr(data-soma);
+					left: calc(50%);
+					bottom: 100%;
+				}
+				&:hover{
+					cursor: normal;
+				}
+				&.um-no-dado{
+					color: red;
+				}
+
+				&.vinte-no-dado{
+					color: green;
+				}
+			}
+
+			.nome{
+				padding-left: 1rem;
+				width: 200px;
+			}
+			
+
+			.mod-des{
+				width: 3ch;
+				// text-align: center;
+			}
+
+			.player-ou-npc, .vivo-ou-morto{
+				width: 3ch;
+				text-align: center;
+				i{
+					display: block;
+					@extend %tooltip;
+					&:after{
+						content: attr(data-popup);
+					}
+				}
+			}
+
+			.player-ou-npc{
+				&.player{
+					i.npc{display: none;}
+					i.player{display: block;}
+				}
+
+				&.npc{
+					i.npc{display: block;}
+					i.player{display: none;}
+				}
+			}
+
+			.vivo-ou-morto{
+				i.morto{
+					color: red;
+				}
+				&.vivo{
+					i.morto{display: none;}
+					i.vivo{display: block;}
+				}
+
+				&.morto{
+					i.morto{display: block;}
+					i.vivo{display: none;}
+				}
+			}
+		}
+	}
+}
