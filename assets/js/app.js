@@ -94,19 +94,7 @@ jQuery(document).ready(function($) {
 		var dadosLocalStorage = [];
 
 		if ($("#iniciativas-geradas").hasClass("visivel")) {
-			var d = new Date();
-			var $novoLi = $("<li><time></time></li>");
-			$novoLi.find("time").text(
-				(d.getDate().toString().length === 1 ? "0" : "")+d.getDate()+
-				"/"+
-				((d.getMonth()+1).toString().length === 1 ? "0" : "")+(d.getMonth()+1)+
-				"/"+
-				(d.getYear()-100+2000)+
-				", às "+
-				(d.getHours().toString().length === 1 ? "0" : "")+d.getHours()+
-				":"+
-				(d.getMinutes().toString().length === 1 ? "0" : "")+d.getMinutes()
-			);
+			var $novoLi = $("<li></li>");
 			$novoLi.append($("#iniciativas-geradas").children().clone(false));
 			$historico.prepend($novoLi);
 		}
@@ -201,6 +189,19 @@ jQuery(document).ready(function($) {
 		// console.log(dadosPessoas);
 
 		var idBatalha = $("#nome-batalha .nome-batalha").val();
+		var d = new Date();
+		
+		$("#iniciativas-geradas time").text(
+			(d.getDate().toString().length === 1 ? "0" : "")+d.getDate()+
+			"/"+
+			((d.getMonth()+1).toString().length === 1 ? "0" : "")+(d.getMonth()+1)+
+			"/"+
+			(d.getYear()-100+2000)+
+			", às "+
+			(d.getHours().toString().length === 1 ? "0" : "")+d.getHours()+
+			":"+
+			(d.getMinutes().toString().length === 1 ? "0" : "")+d.getMinutes()
+		);
 		$("#iniciativas-geradas .nome-batalha").text(idBatalha === "" ? "Um combate qualquer": idBatalha);
 		$("#iniciativas-geradas .rodadas .n-rodada").text($("#nome-batalha .n-rodada").val());
 
