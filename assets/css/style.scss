@@ -176,6 +176,13 @@ input{
 
 
 #iniciativas-geradas{
+	padding: 1em;
+	border: 1px solid;
+	opacity: 0;
+	transition: opacity 0.2s linear;
+	&.visivel{
+		opacity: 1;
+	}
 	.nome-batalha{
 		font-size: 1.5em;
 		font-weight: bold;
@@ -301,6 +308,158 @@ input{
 				&.morto{
 					i.morto{display: block;}
 					i.vivo{display: none;}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+#historico{
+	ul{
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		list-style: none;
+		padding-left: 0;
+		li{
+			@keyframes historicoAparece {
+				0%{
+					opacity: 0;
+					transform: translateY(-3em);
+				}
+
+				100%{
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			animation: historicoAparece 0.4s ease-out 0s 1;
+			&.template{
+				display: none;
+			}
+			padding: 1em;
+			border-right: 1px dotted grey;
+			border-bottom: 1px dotted grey;
+
+			&:nth-child(3n), &:last-child{
+				border-right-width: 0;
+			}
+
+			&:nth-last-child(-n+3){
+				border-bottom-width: 0;
+			}
+
+			time{
+				font-size: .9em;
+				font-style: italic;
+				display: block;
+			}
+
+			h2{
+				margin: 0;
+			}
+
+			table{
+				font-size: .9em;
+				thead{
+					tr{
+						th:nth-child(2){
+							padding-left: 1rem;
+						}
+					}
+				}
+				tbody{
+					.template{display: none;}
+					tr{
+						
+						
+						&.morto{
+							.nome{
+								color: #999999
+							}
+						}
+						&.player{
+							.nome{
+								font-weight: bold;
+								font-style: italic;
+							}
+						}
+					}
+
+					.ini-total{
+						font-weight: 800;
+						font-size: 1.2em;
+						@extend %tooltip;
+						&:after{
+							content: attr(data-soma);
+							left: calc(50%);
+							bottom: 100%;
+						}
+						&:hover{
+							cursor: normal;
+						}
+						&.um-no-dado{
+							color: red;
+						}
+
+						&.vinte-no-dado{
+							color: green;
+						}
+					}
+
+					.nome{
+						padding-left: 1rem;
+						width: 200px;
+					}
+					
+
+					.mod-des{
+						width: 3ch;
+						// text-align: center;
+					}
+
+					.player-ou-npc, .vivo-ou-morto{
+						width: 3ch;
+						text-align: center;
+						i{
+							display: block;
+							@extend %tooltip;
+							&:after{
+								content: attr(data-popup);
+							}
+						}
+					}
+
+					.player-ou-npc{
+						&.player{
+							i.npc{display: none;}
+							i.player{display: block;}
+						}
+
+						&.npc{
+							i.npc{display: block;}
+							i.player{display: none;}
+						}
+					}
+
+					.vivo-ou-morto{
+						i.morto{
+							color: red;
+						}
+						&.vivo{
+							i.morto{display: none;}
+							i.vivo{display: block;}
+						}
+
+						&.morto{
+							i.morto{display: block;}
+							i.vivo{display: none;}
+						}
+					}
 				}
 			}
 		}

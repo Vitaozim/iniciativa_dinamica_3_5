@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
 	var $btAddNovo = $("#adicionar-novo");
 	var $btGerar = $("#gerar-iniciativas");
 	var $tabelaGerada = $("#iniciativas-geradas table tbody");
+	var $historico = $("#historico ul");
 
 	if (localStorage.getItem("pessoasComuns") !== undefined) {
 		$.each(JSON.parse(localStorage.getItem("pessoasComuns")), function(index, val) {
@@ -86,9 +87,30 @@ jQuery(document).ready(function($) {
 
 	});
 
+
+
 	$btGerar.on('click', function(event) {
 		var dadosPessoas = [];
 		var dadosLocalStorage = [];
+
+		if ($("#iniciativas-geradas").hasClass("visivel")) {
+			var d = new Date();
+			var $novoLi = $("<li><time></time></li>");
+			$novoLi.find("time").text(
+				(d.getDate().toString().length === 1 ? "0" : "")+d.getDate()+
+				"/"+
+				((d.getMonth()+1).toString().length === 1 ? "0" : "")+(d.getMonth()+1)+
+				"/"+
+				(d.getYear()-100+2000)+
+				", às "+
+				(d.getHours().toString().length === 1 ? "0" : "")+d.getHours()+
+				":"+
+				(d.getMinutes().toString().length === 1 ? "0" : "")+d.getMinutes()
+			);
+			$novoLi.append($("#iniciativas-geradas").children().clone(false));
+			$historico.prepend($novoLi);
+		}
+		$("#iniciativas-geradas").addClass('visivel');
 		$formIniciativa.children("tr").each(function(index, el) {
 			if ($(el).find(".nome").val() !== "") {
 
@@ -215,18 +237,3 @@ jQuery(document).ready(function($) {
 	});
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
